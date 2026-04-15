@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home - My Website</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body>
+<body class="container mt-5">
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 th:text="'MY Website ' + ${nimSaya}">MY Website 20210140019</h2>
+    <a th:href="@{/logout}" class="btn btn-danger btn-sm">Logout</a>
+</div>
 
+<div class="alert alert-info">Selamat datang di aplikasi!</div>
+
+<a th:href="@{/form}" class="btn btn-success mb-3">Input Data Mahasiswa</a>
+
+<h4>Data Mahasiswa</h4>
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+    <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>NIM</th>
+        <th>Jenis Kelamin</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="mhs, stat : ${listMhs}">
+        <td th:text="${stat.count}">1</td>
+        <td th:text="${mhs.nama}">Nama</td>
+        <td th:text="${mhs.nim}">NIM</td>
+        <td th:text="${mhs.jenisKelamin}">Jenis Kelamin</td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(listMhs)}">
+        <td colspan="4" class="text-center">Belum ada data</td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
